@@ -39,7 +39,8 @@ const defaultProps = {
     required: false,
     isFlag: false,
     validate: false,
-    className: ''
+    className: '',
+    displayname:'name',
 }
 
 class ReferField extends Component {
@@ -57,8 +58,7 @@ class ReferField extends Component {
         }
         this.modelOrg = new cb.models.MdfReferModel({
             cRefType: props.cRefType,
-            displayname: displayname.displayname,
-            valueField: props.valueField,
+            displayname: props.displayname
         });
         this.config = {
             modelconfig: {

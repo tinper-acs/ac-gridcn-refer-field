@@ -71,7 +71,8 @@ var defaultProps = {
     required: false,
     isFlag: false,
     validate: false,
-    className: ''
+    className: '',
+    displayname: 'name'
 };
 
 var ReferField = function (_Component) {
@@ -146,8 +147,7 @@ var ReferField = function (_Component) {
         };
         _this.modelOrg = new _index.cb.models.MdfReferModel({
             cRefType: props.cRefType,
-            displayname: displayname.displayname,
-            valueField: props.valueField
+            displayname: props.displayname
         });
         _this.config = {
             modelconfig: {
