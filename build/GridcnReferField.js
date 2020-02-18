@@ -115,11 +115,13 @@ var ReferField = function (_Component) {
                 index = _this$props2.index,
                 onValidate = _this$props2.onValidate,
                 message = _this$props2.message,
-                pattern = _this$props2.pattern;
+                pattern = _this$props2.pattern,
+                _this$props2$referVal = _this$props2.referValueType,
+                referValueType = _this$props2$referVal === undefined ? 'string' : _this$props2$referVal;
             var value = _this.state.value;
             //设置校验规则
 
-            var descriptor = _defineProperty({}, field, { type: "object", required: required });
+            var descriptor = _defineProperty({}, field, { type: referValueType, required: required });
             if (pattern) {
                 descriptor[field].push({
                     pattern: pattern, message: message
