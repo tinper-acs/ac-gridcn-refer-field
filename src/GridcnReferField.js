@@ -106,7 +106,7 @@ class ReferField extends Component {
         let { value } = this.state;
         //设置校验规则
         let descriptor = {
-            [field]: { type: "string", required }
+            [field]: { type: "object", required }
         }
         if(pattern){
             descriptor[field].push({
