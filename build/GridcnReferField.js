@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -119,9 +121,13 @@ var ReferField = function (_Component) {
                 _this$props2$referVal = _this$props2.referValueType,
                 referValueType = _this$props2$referVal === undefined ? 'string' : _this$props2$referVal;
             var value = _this.state.value;
-            //设置校验规则
 
-            var descriptor = _defineProperty({}, field, { type: referValueType, required: required });
+            var type = 'string';
+            if (value) {
+                if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object') type = 'object';
+            }
+            //设置校验规则
+            var descriptor = _defineProperty({}, field, { type: type, required: required });
             if (pattern) {
                 descriptor[field].push({
                     pattern: pattern, message: message

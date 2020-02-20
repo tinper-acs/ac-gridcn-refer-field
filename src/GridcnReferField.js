@@ -104,9 +104,13 @@ class ReferField extends Component {
     validate = () => {
         let { required, field, index, onValidate,message,pattern,referValueType='string' } = this.props;
         let { value } = this.state;
+        let type = 'string';
+        if(value){
+            if(typeof value =='object')type='object';
+        }
         //设置校验规则
         let descriptor = {
-            [field]: { type: referValueType, required }
+            [field]: { type, required }
         }
         if(pattern){
             descriptor[field].push({
