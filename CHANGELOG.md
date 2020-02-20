@@ -1,3 +1,13 @@
+<a name="0.0.5"></a>
+## [0.0.5](https://github.com/tinper-bee/ac-gridcn-refer-field/compare/v0.0.4...v0.0.5) (2020-02-20)
+
+
+### Features
+
+* **ac-gridcn-refer-field:** 适配object 和 string ([8d3b9ae](https://github.com/tinper-bee/ac-gridcn-refer-field/commit/8d3b9ae))
+
+
+
 <a name="0.0.4"></a>
 ## [0.0.4](https://github.com/tinper-bee/ac-gridcn-refer-field/compare/v0.0.3...v0.0.4) (2020-02-18)
 
