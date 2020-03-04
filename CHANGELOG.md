@@ -1,3 +1,8 @@
+<a name="0.0.6"></a>
+## [0.0.6](https://github.com/tinper-bee/ac-gridcn-refer-field/compare/v0.0.5...v0.0.6) (2020-03-04)
+
+
+
 <a name="0.0.5"></a>
 ## [0.0.5](https://github.com/tinper-bee/ac-gridcn-refer-field/compare/v0.0.4...v0.0.5) (2020-02-20)
 
