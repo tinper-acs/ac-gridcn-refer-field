@@ -77,6 +77,13 @@ class ReferField extends Component {
         if (nextProps.validate == true) {
             this.validate();
         }
+        if('value' in nextProps ){
+            this.setState({
+                value:nextProps.value
+            },()=>{
+                this.modelOrg.setValue(nextProps.value);
+            })
+        }
     }
     afterValueChange = (data) => {
         if(Array.isArray(data.value) && data.value.length === 0) return;//解决问题树参照根节点问题

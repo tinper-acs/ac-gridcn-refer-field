@@ -174,8 +174,17 @@ var ReferField = function (_Component) {
 
 
     ReferField.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+        var _this2 = this;
+
         if (nextProps.validate == true) {
             this.validate();
+        }
+        if ('value' in nextProps) {
+            this.setState({
+                value: nextProps.value
+            }, function () {
+                _this2.modelOrg.setValue(nextProps.value);
+            });
         }
     };
 
