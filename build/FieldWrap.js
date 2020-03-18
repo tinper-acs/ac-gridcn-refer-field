@@ -47,7 +47,7 @@ var FieldWrap = function (_Component) {
         return _react2["default"].createElement(
             "div",
             { className: "triangle-flag" },
-            required ? _react2["default"].createElement(
+            false ? _react2["default"].createElement(
                 "div",
                 { className: "triangle-redline" },
                 " "

@@ -9,7 +9,7 @@ class FieldWrap extends Component {
         let { error, message, required, children, flag } = this.props;
 
         return (<div className="triangle-flag">
-            {required ? (
+            {false ? (
                 <div className="triangle-redline"> </div>
             ) : null}
 
