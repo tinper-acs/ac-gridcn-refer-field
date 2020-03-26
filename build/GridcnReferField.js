@@ -153,10 +153,10 @@ var ReferField = function (_Component) {
             flag: false,
             error: false
         };
-        _this.modelOrg = new _index.cb.models.MdfReferModel({
+        _this.modelOrg = new _index.cb.models.MdfReferModel(_extends({
             cRefType: props.cRefType,
             displayname: props.displayname
-        });
+        }, props));
         _this.config = {
             modelconfig: {
                 afterValueChange: _this.afterValueChange

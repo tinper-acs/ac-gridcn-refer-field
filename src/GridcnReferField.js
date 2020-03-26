@@ -58,7 +58,8 @@ class ReferField extends Component {
         }
         this.modelOrg = new cb.models.MdfReferModel({
             cRefType: props.cRefType,
-            displayname: props.displayname
+            displayname: props.displayname,
+            ...props
         });
         this.config = {
             modelconfig: {
