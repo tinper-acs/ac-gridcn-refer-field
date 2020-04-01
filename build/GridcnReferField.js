@@ -125,6 +125,7 @@ var ReferField = function (_Component) {
             var type = 'string';
             if (value) {
                 if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object') type = 'object';
+                if (Array.isArray(value)) type = 'array';
             }
             //设置校验规则
             var descriptor = _defineProperty({}, field, { type: type, required: required });

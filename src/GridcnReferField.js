@@ -115,6 +115,7 @@ class ReferField extends Component {
         let type = 'string';
         if(value){
             if(typeof value =='object')type='object';
+            if(Array.isArray(value))type='array'
         }
         //设置校验规则
         let descriptor = {
