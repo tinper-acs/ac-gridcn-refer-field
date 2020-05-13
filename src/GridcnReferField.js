@@ -86,10 +86,19 @@ class ReferField extends Component {
             })
         }
     }
+
+    componentDidMount(){
+        this.changeed = false;
+    }
+    componentDidUpdate(){
+        this.changeed = true;
+    }
+
     afterValueChange = (data) => {
         if(Array.isArray(data.value) && data.value.length === 0) return;//解决问题树参照根节点问题
         this.handlerChange(data.value)
     }
+
 
     /**
      * 有输入值改变的回调
@@ -99,7 +108,7 @@ class ReferField extends Component {
     handlerChange = (value) => {
         let { onChange, field, index, status } = this.props;
         //处理是否有修改状态改变、状态同步之后校验输入是否正确
-        this.setState({ value, flag: status == 'edit' }, () => {
+        this.setState({ value, flag: status == 'edit'&&this.changeed }, () => {
             this.validate();
         });
         //回调外部函数
@@ -142,7 +151,6 @@ class ReferField extends Component {
     }
     render() {
         let { value, error, flag } = this.state;
-
         let { className, message, required,fieldProps } = this.props;
 
         return (

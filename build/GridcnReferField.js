@@ -103,7 +103,7 @@ var ReferField = function (_Component) {
                 status = _this$props.status;
             //处理是否有修改状态改变、状态同步之后校验输入是否正确
 
-            _this.setState({ value: value, flag: status == 'edit' }, function () {
+            _this.setState({ value: value, flag: status == 'edit' && _this.changeed }, function () {
                 _this.validate();
             });
             //回调外部函数
@@ -187,6 +187,14 @@ var ReferField = function (_Component) {
                 _this2.modelOrg.setValue(nextProps.value);
             });
         }
+    };
+
+    ReferField.prototype.componentDidMount = function componentDidMount() {
+        this.changeed = false;
+    };
+
+    ReferField.prototype.componentDidUpdate = function componentDidUpdate() {
+        this.changeed = true;
     };
 
     /**
