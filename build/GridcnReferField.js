@@ -91,7 +91,7 @@ var ReferField = function (_Component) {
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
         _this.afterValueChange = function (data) {
-            if (Array.isArray(data.value) && data.value.length === 0) return; //解决问题树参照根节点问题
+            if (Array.isArray(data.value) && data.value.length === 0 && data.oldValue.length == 0) return; //解决问题树参照根节点问题
             _this.handlerChange(data.value);
         };
 
@@ -125,7 +125,13 @@ var ReferField = function (_Component) {
             var type = 'string';
             if (value) {
                 if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object') type = 'object';
-                if (Array.isArray(value)) type = 'array';
+                if (Array.isArray(value)) {
+                    type = 'array';
+                    if (value.length == 0) {
+                        type = 'string';
+                        value = '';
+                    }
+                }
             }
             //设置校验规则
             var descriptor = _defineProperty({}, field, { type: type, required: required });

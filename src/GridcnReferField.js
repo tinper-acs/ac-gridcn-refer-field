@@ -95,7 +95,7 @@ class ReferField extends Component {
     }
 
     afterValueChange = (data) => {
-        if(Array.isArray(data.value) && data.value.length === 0) return;//解决问题树参照根节点问题
+        if(Array.isArray(data.value) && data.value.length === 0 && data.oldValue.length==0) return;//解决问题树参照根节点问题
         this.handlerChange(data.value)
     }
 
@@ -124,7 +124,13 @@ class ReferField extends Component {
         let type = 'string';
         if(value){
             if(typeof value =='object')type='object';
-            if(Array.isArray(value))type='array'
+            if(Array.isArray(value)){
+                type='array';
+                if(value.length==0){
+                    type = 'string';
+                    value = ''
+                }
+            }
         }
         //设置校验规则
         let descriptor = {
