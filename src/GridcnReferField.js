@@ -95,7 +95,7 @@ class ReferField extends Component {
     }
 
     afterValueChange = (data) => {
-        if(Array.isArray(data.value) && data.value.length === 0 && data.oldValue.length==0) return;//解决问题树参照根节点问题
+        if(Array.isArray(data.value) && data.value.length === 0 && !this.props.multiple) return;//解决问题树参照根节点问题
         this.handlerChange(data.value)
     }
 

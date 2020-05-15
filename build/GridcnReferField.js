@@ -91,7 +91,7 @@ var ReferField = function (_Component) {
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
         _this.afterValueChange = function (data) {
-            if (Array.isArray(data.value) && data.value.length === 0 && data.oldValue.length == 0) return; //解决问题树参照根节点问题
+            if (Array.isArray(data.value) && data.value.length === 0 && !_this.props.multiple) return; //解决问题树参照根节点问题
             _this.handlerChange(data.value);
         };
 
