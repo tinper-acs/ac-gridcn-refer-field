@@ -1,3 +1,13 @@
+<a name="0.0.19"></a>
+## [0.0.19](https://github.com/tinper-bee/ac-gridcn-refer-field/compare/v0.0.18...v0.0.19) (2020-05-19)
+
+
+### Features
+
+* [@yonyou](https://github.com/yonyou)/mdf-refer升级 ([29b549e](https://github.com/tinper-bee/ac-gridcn-refer-field/commit/29b549e))
+
+
+
 <a name="0.0.18"></a>
 ## [0.0.18](https://github.com/tinper-bee/ac-gridcn-refer-field/compare/v0.0.17...v0.0.18) (2020-05-19)
 
