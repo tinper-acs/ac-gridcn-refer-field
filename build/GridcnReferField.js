@@ -90,7 +90,30 @@ var ReferField = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
+        _this.onCancel = function () {
+            if (!_this.valueChanged) {
+                _this.modelOrg.setValue(_this.props.text);
+            }
+        };
+
+        _this.setValue = function (value) {
+            if (typeof value == 'string' && value && value.indexOf(',') != -1) {
+                value = value.split(',');
+            }
+            //TODO 值临时从cb中取
+            if (_index.cb.custom) {
+                _index.cb.custom.referFieldValueKeys = value || [];
+            } else {
+                _index.cb.custom = {
+                    referFieldValueKeys: value || []
+                };
+            }
+        };
+
         _this.afterValueChange = function (data) {
+            if (_this.changeed) {
+                _this.valueChanged = true;
+            }
             if (Array.isArray(data.value) && data.value.length === 0 && !_this.props.multiple) return; //解决问题树参照根节点问题
             _this.handlerChange(data.value);
         };
@@ -160,6 +183,7 @@ var ReferField = function (_Component) {
             flag: false,
             error: false
         };
+        _this.valueChanged = false;
         _this.modelOrg = new _index.cb.models.MdfReferModel(_extends({
             cRefType: props.cRefType,
             displayname: props.displayname
@@ -169,8 +193,20 @@ var ReferField = function (_Component) {
                 afterValueChange: _this.afterValueChange
             }
         };
+        _this.modelOrg.on('beforeBrowse', function () {
+            if (_this.props.value) {
+                _this.modelOrg.setValue(_this.props.value.id ? _this.props.value.id : _this.props.value);
+            } else {
+                _this.modelOrg.setValue('');
+            }
+            setTimeout(function () {
+                document.querySelector('.referModal .refer-footer-container .refer-footer-btns-container .refer-modal-footer-cancle-btn').onclick = _this.onCancel;
+                document.querySelector('.referModal .refer-modal-header .anticon.anticon-close').onclick = _this.onCancel;
+            }, 500);
+        });
         return _this;
     }
+
     /**
      *  参数发生变化回调
      *
@@ -178,8 +214,6 @@ var ReferField = function (_Component) {
      * @param {object} nextState 即将更新State
      * @memberof NumberField
      */
-
-
     ReferField.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
         var _this2 = this;
 
@@ -187,16 +221,23 @@ var ReferField = function (_Component) {
             this.validate();
         }
         if ('value' in nextProps) {
+            var value = nextProps.value;
             this.setState({
-                value: nextProps.value
+                value: value
             }, function () {
-                _this2.modelOrg.setValue(nextProps.value);
+                if (Array.isArray(value)) {
+                    _this2.modelOrg.setValue(value);
+                } else {
+                    _this2.setValue(value);
+                }
             });
         }
     };
 
     ReferField.prototype.componentDidMount = function componentDidMount() {
         this.changeed = false;
+        this.setValue(this.props.value, true);
+        this.modelOrg.setValue(this.props.text);
     };
 
     ReferField.prototype.componentDidUpdate = function componentDidUpdate() {

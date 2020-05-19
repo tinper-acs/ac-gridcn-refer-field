@@ -56,6 +56,7 @@ class ReferField extends Component {
             flag: false,
             error: false
         }
+        this.valueChanged = false;
         this.modelOrg = new cb.models.MdfReferModel({
             cRefType: props.cRefType,
             displayname: props.displayname,
@@ -63,8 +64,24 @@ class ReferField extends Component {
         });
         this.config = {
             modelconfig: {
-                afterValueChange: this.afterValueChange,
+                afterValueChange: this.afterValueChange
             }
+        }
+        this.modelOrg.on('beforeBrowse',()=>{
+            if(this.props.value){
+                this.modelOrg.setValue(this.props.value.id?this.props.value.id:this.props.value);
+            }else{
+                this.modelOrg.setValue('')
+            }
+            setTimeout(()=>{
+                document.querySelector('.referModal .refer-footer-container .refer-footer-btns-container .refer-modal-footer-cancle-btn').onclick=this.onCancel
+                document.querySelector('.referModal .refer-modal-header .anticon.anticon-close').onclick=this.onCancel
+            },500)
+        })
+    }
+    onCancel=()=>{
+        if(!this.valueChanged){
+            this.modelOrg.setValue(this.props.text);
         }
     }
     /**
@@ -79,22 +96,46 @@ class ReferField extends Component {
             this.validate();
         }
         if('value' in nextProps ){
+            let value = nextProps.value;
             this.setState({
-                value:nextProps.value
+                value
             },()=>{
-                this.modelOrg.setValue(nextProps.value);
+                if(Array.isArray(value)){
+                    this.modelOrg.setValue(value)
+                }else{
+                    this.setValue(value)
+                }
             })
+        }
+    }
+
+    setValue=(value)=>{
+        if(typeof value == 'string' && value&&value.indexOf(',')!=-1){
+            value = value.split(',')
+        }
+        //TODO 值临时从cb中取
+        if(cb.custom){
+            cb.custom.referFieldValueKeys = value||[];
+        }else{
+            cb.custom = {
+                referFieldValueKeys:value||[]
+            }
         }
     }
 
     componentDidMount(){
         this.changeed = false;
+        this.setValue(this.props.value,true)
+        this.modelOrg.setValue(this.props.text);
     }
     componentDidUpdate(){
         this.changeed = true;
     }
 
     afterValueChange = (data) => {
+        if(this.changeed){
+            this.valueChanged = true;
+        }
         if(Array.isArray(data.value) && data.value.length === 0 && !this.props.multiple) return;//解决问题树参照根节点问题
         this.handlerChange(data.value)
     }
