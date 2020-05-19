@@ -199,6 +199,13 @@ var ReferField = function (_Component) {
             } else {
                 _this.modelOrg.setValue('');
             }
+            if (_index.cb.custom) {
+                _index.cb.custom.referFieldValueKeys = _this.props.value || [];
+            } else {
+                _index.cb.custom = {
+                    referFieldValueKeys: _this.props.value || []
+                };
+            }
             setTimeout(function () {
                 document.querySelector('.referModal .refer-footer-container .refer-footer-btns-container .refer-modal-footer-cancle-btn').onclick = _this.onCancel;
                 document.querySelector('.referModal .refer-modal-header .anticon.anticon-close').onclick = _this.onCancel;

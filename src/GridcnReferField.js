@@ -73,6 +73,13 @@ class ReferField extends Component {
             }else{
                 this.modelOrg.setValue('')
             }
+            if(cb.custom){
+                cb.custom.referFieldValueKeys = this.props.value||[];
+            }else{
+                cb.custom = {
+                    referFieldValueKeys:this.props.value||[]
+                }
+            }
             setTimeout(()=>{
                 document.querySelector('.referModal .refer-footer-container .refer-footer-btns-container .refer-modal-footer-cancle-btn').onclick=this.onCancel
                 document.querySelector('.referModal .refer-modal-header .anticon.anticon-close').onclick=this.onCancel
