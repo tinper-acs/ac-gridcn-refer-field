@@ -37,26 +37,29 @@
   "changelog": "bee-tools run changelog"
  },
  "dependencies": {
-  "@yonyou/mdf-refer": "2.2.93",
   "async-validator": "^3.2.3",
   "babel-runtime": "^6.23.0",
   "classnames": "^2.2.5",
-  "tinper-bee-core": "latest"
+  "tinper-bee-core": "latest",
+  "ac-mdf-refer-test":"1.0.1"
  },
  "devDependencies": {
+  "ac-grid": "^0.2.0",
+  "ac-gridcn": "^1.0.6",
+  "bee-button": "latest",
+  "bee-clipboard": "^2.0.0",
+  "bee-drawer": "0.0.2",
+  "bee-layout": "latest",
+  "bee-panel": "latest",
+  "bee-tools": "^1.0.11",
   "chai": "^3.5.0",
-  "enzyme": "^2.4.1",
-  "react": "15.3.2",
-  "react-addons-test-utils": "15.3.2",
-  "react-dom": "15.3.2",
   "console-polyfill": "~0.2.1",
   "cz-conventional-changelog": "^2.1.0",
+  "enzyme": "^2.4.1",
   "es5-shim": "~4.1.10",
-  "bee-drawer": "0.0.2",
-  "bee-clipboard": "^2.0.0",
-  "bee-panel": "latest",
-  "bee-layout": "latest",
-  "bee-button": "latest"
+  "react": "15.3.2",
+  "react-addons-test-utils": "15.3.2",
+  "react-dom": "15.3.2"
  },
  "peerDependencies": {
   "react": ">= 15.3.0",

@@ -20,9 +20,9 @@ var _asyncValidator = require('async-validator');
 
 var _asyncValidator2 = _interopRequireDefault(_asyncValidator);
 
-var _index = require('@yonyou/mdf-refer/lib/index');
+var _acMdfRefer = require('ac-mdf-refer');
 
-var _index2 = _interopRequireDefault(_index);
+var _acMdfRefer2 = _interopRequireDefault(_acMdfRefer);
 
 var _FieldWrap = require('./FieldWrap');
 
@@ -47,6 +47,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 //类型校验
 
 //验证组件 https://www.npmjs.com/package/async-validator
+
+
+// import MdfRefer,{ cb } from '@yonyou/mdf-refer/lib/index'
 
 
 //类型校验
@@ -101,10 +104,10 @@ var ReferField = function (_Component) {
                 value = value.split(',');
             }
             //TODO 值临时从cb中取
-            if (_index.cb.custom) {
-                _index.cb.custom.referFieldValueKeys = value || [];
+            if (cb.custom) {
+                cb.custom.referFieldValueKeys = value || [];
             } else {
-                _index.cb.custom = {
+                cb.custom = {
                     referFieldValueKeys: value || []
                 };
             }
@@ -184,7 +187,7 @@ var ReferField = function (_Component) {
             error: false
         };
         _this.valueChanged = false;
-        _this.modelOrg = new _index.cb.models.MdfReferModel(_extends({
+        _this.modelOrg = new cb.models.ReferModel(_extends({
             cRefType: props.cRefType,
             displayname: props.displayname
         }, props));
@@ -199,10 +202,10 @@ var ReferField = function (_Component) {
             } else {
                 _this.modelOrg.setValue('');
             }
-            if (_index.cb.custom) {
-                _index.cb.custom.referFieldValueKeys = _this.props.value || [];
+            if (cb.custom) {
+                cb.custom.referFieldValueKeys = _this.props.value || [];
             } else {
-                _index.cb.custom = {
+                cb.custom = {
                     referFieldValueKeys: _this.props.value || []
                 };
             }
@@ -283,7 +286,7 @@ var ReferField = function (_Component) {
                 message: message,
                 flag: flag
             },
-            _react2["default"].createElement(_index2["default"], _extends({}, fieldProps, {
+            _react2["default"].createElement(_acMdfRefer2["default"], _extends({}, fieldProps, {
                 className: className + ' triangle-element',
                 modelName: 'refer',
                 model: this.modelOrg,
