@@ -6,7 +6,7 @@
 */
 import React, { Component } from 'react';
 import data from './data';
-import { Grid } from 'ac-gridcn';
+import { EditGrid } from 'ac-gridcn';
 import ReferField from '../../src/index';
 
 class Demo1 extends Component {
@@ -18,6 +18,20 @@ class Demo1 extends Component {
                 dataIndex: "code",
                 key: "code",
                 width: 150
+            },
+            {
+                title: "员工姓名",
+                dataIndex: "name",
+                key: "name",
+                width: 120,
+                renderType:'input',
+                required:true,
+                validate:true,
+                fieldProps:{
+                    defaultValue:'姓名',
+                    // autoSize: { minRows: 3, maxRows: 5 },
+                    // componentClass: 'textarea' // 多行文本示例
+                },
             },
             {
                 title: "物料名称" ,
@@ -34,72 +48,12 @@ class Demo1 extends Component {
                 }
             },
             {
-                title: "员工性别",
-                dataIndex: "sexEnumValue",
-                key: "sexEnumValue",
-                width: 120,
-                
-            },
-            {
-                title: "工龄",
-                dataIndex: "serviceYears",
-                key: "serviceYears",
-                width: 130,
-                
-            },
-            {
-                title: "司龄",
-                dataIndex: "serviceYearsCompany",
-                key: "serviceYearsCompany",
-                width: 130,
-            },
-            {
-                title: "年份",
-                dataIndex: "year",
-                key: "year",
-                width: 100,
-            },
-            {
-                title: "月份",
-                dataIndex: "monthEnumValue",
-                key: "monthEnumValue",
-                width: 120,
-            },
-            {
-                title: "补贴类别",
-                dataIndex: "allowanceTypeEnumValue",
-                key: "allowanceTypeEnumValue",
-                width: 120,
-            },
-            {
-                title: "补贴标准",
-                dataIndex: "allowanceStandard",
-                key: "allowanceStandard",
-                width: 120,
-            },
-            {
-                title: "实际补贴",
-                dataIndex: "allowanceActual",
-                key: "allowanceActual",
-                width: 120,
-            },
-            {
-                title: "是否超标",
-                dataIndex: "exdeedsEnumValue",
-                key: "exdeedsEnumValue",
-                width: 120,
-            },
-            {
-                title: "领取方式",
-                dataIndex: "pickTypeEnumValue",
-                key: "pickTypeEnumValue",
-                width: 120,
-            },
-            {
                 title: "备注",
                 dataIndex: "remark",
                 key: "remark",
                 width: 100,
+                renderType:'input',
+                required:false,
             }
         ];
         this.state={
@@ -136,20 +90,41 @@ class Demo1 extends Component {
     onPageSelect = (value, type) => {
         console.log('onPageSelect')
     }
-    getSelectedDataFunc=()=>{
-        console.log('getSelectedDataFunc')
-    }
 
     getAllData=()=>{
         console.log(this.grid.allData)
     }
-    
+    getSelectData=()=>{
+        console.log(this.grid.selectList)
+    }
+    validate=()=>{
+        let error = this.grid.validate();
+        if(error){
+            alert('数据校验失败，错误信息见控制台');
+            console.log(error)
+        }else{
+            alert('数据校验成功')
+        }
+    }
+    validateSelect=()=>{
+        let error = this.grid.validateSelect();
+        if(error){
+            alert('数据校验失败，错误信息见控制台');
+            console.log(error)
+        }else{
+            alert('数据校验成功')
+        }
+    }
     changPag=()=>{
         this.setState({
             activePage:2,
             total:50,
             items:20
         })
+    }
+
+    onChange = (data) => {
+        console.log('data',data);
     }
     
     render () {
@@ -163,12 +138,30 @@ class Demo1 extends Component {
         }
         return (
             <div className='grid-parent'>
-                <Grid
+                {/* <div style={{'marginBottom':'20px'}}>
+                    <Button onClick={this.changPag} colors="primary" >改变分页</Button>
+                    <Button onClick={this.getAllData} colors="primary" style={{'marginLeft':'20px'}} >获得所有数据</Button>
+                    <Button onClick={this.getSelectData} colors="primary" style={{'marginLeft':'20px'}} >获得选中数据</Button>
+                    <Button onClick={this.validate} colors="primary" style={{'marginLeft':'20px'}}>主动校验</Button>
+                    <Button onClick={this.validateSelect} colors="primary" style={{'marginLeft':'20px'}}>主动校验选中数据</Button>
+                </div> */}
+                
+                <EditGrid
                     ref={(el) => this.grid = el}//ref用于调用内部方法
                     data={data}//数据
                     columns={this.column}//定义列
                     paginationObj={paginationObj}//分页数据
-                    getSelectedDataFunc={this.getSelectedDataFunc}//选择数据后的回调
+                    excludeKeys={['id','ts','lastModified']}
+                    delRow={(selectList,newData)=>{
+                        console.log('删除，数据如下-----------',selectList)
+                        console.log('新的数据如下-----------',newData)
+                    }}
+                    save={(selectList)=>{
+                        console.log('保存，数据如下-----------',selectList)
+                    }}
+                    headerScroll={true}
+                    onChange = {this.onChange}
+                    title="我是标题"
                 />
             </div>
         )

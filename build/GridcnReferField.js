@@ -49,9 +49,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 //验证组件 https://www.npmjs.com/package/async-validator
 
 
-// import MdfRefer,{ cb } from '@yonyou/mdf-refer/lib/index'
-
-
 //类型校验
 var propTypes = {
     value: _propTypes2["default"].any,

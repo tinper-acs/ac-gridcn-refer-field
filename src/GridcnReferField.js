@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 //验证组件 https://www.npmjs.com/package/async-validator
 import schema from 'async-validator';
 
-// import MdfRefer,{ cb } from '@yonyou/mdf-refer/lib/index'
 import MdfRefer from 'ac-mdf-refer'
 
 import FieldWrap from './FieldWrap'
