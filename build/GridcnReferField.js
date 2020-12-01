@@ -186,7 +186,10 @@ var ReferField = function (_Component) {
         _this.valueChanged = false;
         _this.modelOrg = new cb.models.ReferModel(_extends({
             cRefType: props.cRefType,
-            displayname: props.displayname
+            displayname: props.displayname,
+
+            externalData: { name: 12 }
+
         }, props));
         _this.config = {
             modelconfig: {
@@ -283,13 +286,17 @@ var ReferField = function (_Component) {
                 message: message,
                 flag: flag
             },
-            _react2["default"].createElement(_acMdfRefer2["default"], _extends({}, fieldProps, {
-                className: className + ' triangle-element',
-                modelName: 'refer',
-                model: this.modelOrg,
-                config: this.config,
-                value: value
-            }))
+            _react2["default"].createElement(
+                'div',
+                { id: 'yxyweb-support-container' },
+                _react2["default"].createElement(_acMdfRefer2["default"], _extends({}, fieldProps, {
+                    className: className + ' triangle-element',
+                    modelName: 'refer',
+                    model: this.modelOrg,
+                    config: this.config,
+                    value: value
+                }))
+            )
         );
     };
 

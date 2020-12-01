@@ -60,6 +60,9 @@ class ReferField extends Component {
         this.modelOrg = new cb.models.ReferModel({
             cRefType: props.cRefType,
             displayname: props.displayname,
+            
+            externalData: { name: 12 },
+            
             ...props
         });
         this.config = {
@@ -214,7 +217,9 @@ class ReferField extends Component {
                 message={message}
                 flag={flag}
             >
-                <MdfRefer 
+            {/* 参照固定容器 */}
+            <div id="yxyweb-support-container">
+                <MdfRefer
                     {...fieldProps}
                     className={`${className} triangle-element`}
                     modelName={'refer'} 
@@ -222,6 +227,7 @@ class ReferField extends Component {
                     config={this.config}
                     value={value}
                     />
+            </div>
             </FieldWrap>
         );
     }
