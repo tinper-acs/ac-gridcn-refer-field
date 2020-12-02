@@ -60,9 +60,6 @@ class ReferField extends Component {
         this.modelOrg = new cb.models.ReferModel({
             cRefType: props.cRefType,
             displayname: props.displayname,
-            
-            externalData: { name: 12 },
-            
             ...props
         });
         this.config = {

@@ -186,10 +186,7 @@ var ReferField = function (_Component) {
         _this.valueChanged = false;
         _this.modelOrg = new cb.models.ReferModel(_extends({
             cRefType: props.cRefType,
-            displayname: props.displayname,
-
-            externalData: { name: 12 }
-
+            displayname: props.displayname
         }, props));
         _this.config = {
             modelconfig: {
