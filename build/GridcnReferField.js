@@ -291,7 +291,8 @@ var ReferField = function (_Component) {
                     modelName: 'refer',
                     model: this.modelOrg,
                     config: this.config,
-                    value: value
+                    value: value,
+                    onChange: this.handlerChange
                 }))
             )
         );

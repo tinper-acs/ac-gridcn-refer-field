@@ -223,6 +223,7 @@ class ReferField extends Component {
                     model={this.modelOrg} 
                     config={this.config}
                     value={value}
+                    onChange={this.handlerChange}
                     />
             </div>
             </FieldWrap>
