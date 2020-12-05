@@ -1,8 +1,6 @@
 /**
  * Text (文本输入框)
  */
-
-//React导入
 import React, { Component } from 'react';
 //类型校验
 import PropTypes from 'prop-types';
@@ -67,6 +65,14 @@ class ReferField extends Component {
                 afterValueChange: this.afterValueChange
             }
         }
+        //TODO 自定义 valueField 的时候，目前只有多选是可用的，MDF需要修改源码
+        // this.modelOrg.on('afterInitVm',()=>{
+        //     let vm = this.modelOrg.getCache('vm');
+        //     vm.on('getRefMetaReady',()=>{
+        //         this.modelOrg.setState('refKeyField',props.valueField)
+        //         vm.get('table').setState('rowKeyField', props.valueField);
+        //     })
+        // })
         this.modelOrg.on('beforeBrowse',()=>{
             if(this.props.value){
                 this.modelOrg.setValue(this.props.value.id?this.props.value.id:this.props.value);
@@ -80,12 +86,9 @@ class ReferField extends Component {
                     referFieldValueKeys:this.props.value||[]
                 }
             }
-            setTimeout(()=>{
-                document.querySelector('.referModal .refer-footer-container .refer-footer-btns-container .refer-modal-footer-cancle-btn').onclick=this.onCancel
-                document.querySelector('.referModal .refer-modal-header .anticon.anticon-close').onclick=this.onCancel
-            },500)
         })
     }
+    
     onCancel=()=>{
         if(!this.valueChanged){
             this.modelOrg.setValue(this.props.text);
@@ -206,7 +209,6 @@ class ReferField extends Component {
     render() {
         let { value, error, flag } = this.state;
         let { className, message, required,fieldProps } = this.props;
-
         return (
             <FieldWrap
                 required={required}
@@ -214,18 +216,15 @@ class ReferField extends Component {
                 message={message}
                 flag={flag}
             >
-            {/* 参照固定容器 */}
-            <div id="yxyweb-support-container">
-                <MdfRefer
-                    {...fieldProps}
-                    className={`${className} triangle-element`}
-                    modelName={'refer'} 
-                    model={this.modelOrg} 
-                    config={this.config}
-                    value={value}
-                    onChange={this.handlerChange}
-                    />
-            </div>
+            <MdfRefer
+                {...fieldProps}
+                className={`${className} triangle-element`}
+                modelName={'refer'} 
+                model={this.modelOrg} 
+                config={this.config}
+                value={value}
+                onChange={this.handlerChange}
+            />
             </FieldWrap>
         );
     }

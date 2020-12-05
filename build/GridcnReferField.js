@@ -42,8 +42,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * Text (文本输入框)
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
-//React导入
-
 //类型校验
 
 //验证组件 https://www.npmjs.com/package/async-validator
@@ -192,8 +190,15 @@ var ReferField = function (_Component) {
             modelconfig: {
                 afterValueChange: _this.afterValueChange
             }
-        };
-        _this.modelOrg.on('beforeBrowse', function () {
+            //TODO 自定义 valueField 的时候，目前只有多选是可用的，MDF需要修改源码
+            // this.modelOrg.on('afterInitVm',()=>{
+            //     let vm = this.modelOrg.getCache('vm');
+            //     vm.on('getRefMetaReady',()=>{
+            //         this.modelOrg.setState('refKeyField',props.valueField)
+            //         vm.get('table').setState('rowKeyField', props.valueField);
+            //     })
+            // })
+        };_this.modelOrg.on('beforeBrowse', function () {
             if (_this.props.value) {
                 _this.modelOrg.setValue(_this.props.value.id ? _this.props.value.id : _this.props.value);
             } else {
@@ -206,10 +211,6 @@ var ReferField = function (_Component) {
                     referFieldValueKeys: _this.props.value || []
                 };
             }
-            setTimeout(function () {
-                document.querySelector('.referModal .refer-footer-container .refer-footer-btns-container .refer-modal-footer-cancle-btn').onclick = _this.onCancel;
-                document.querySelector('.referModal .refer-modal-header .anticon.anticon-close').onclick = _this.onCancel;
-            }, 500);
         });
         return _this;
     }
@@ -274,7 +275,6 @@ var ReferField = function (_Component) {
             required = _props.required,
             fieldProps = _props.fieldProps;
 
-
         return _react2["default"].createElement(
             _FieldWrap2["default"],
             {
@@ -283,18 +283,14 @@ var ReferField = function (_Component) {
                 message: message,
                 flag: flag
             },
-            _react2["default"].createElement(
-                'div',
-                { id: 'yxyweb-support-container' },
-                _react2["default"].createElement(_acMdfRefer2["default"], _extends({}, fieldProps, {
-                    className: className + ' triangle-element',
-                    modelName: 'refer',
-                    model: this.modelOrg,
-                    config: this.config,
-                    value: value,
-                    onChange: this.handlerChange
-                }))
-            )
+            _react2["default"].createElement(_acMdfRefer2["default"], _extends({}, fieldProps, {
+                className: className + ' triangle-element',
+                modelName: 'refer',
+                model: this.modelOrg,
+                config: this.config,
+                value: value,
+                onChange: this.handlerChange
+            }))
         );
     };
 
