@@ -88,11 +88,19 @@ var ReferField = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
-        _this.onCancel = function () {
-            if (!_this.valueChanged) {
-                _this.modelOrg.setValue(_this.props.text);
-            }
-        };
+        _this.onCancel = function () {}
+        // if(!this.valueChanged){
+        //     this.modelOrg.setValue(this.props.text);
+        // }
+
+        /**
+         *  参数发生变化回调
+         *
+         * @param {object} nextProps 即将更新Props
+         * @param {object} nextState 即将更新State
+         * @memberof NumberField
+         */
+        ;
 
         _this.setValue = function (value) {
             if (typeof value == 'string' && value && value.indexOf(',') != -1) {
@@ -186,6 +194,8 @@ var ReferField = function (_Component) {
             cRefType: props.cRefType,
             displayname: props.displayname
         }, props));
+        // this.modelOrg.setState("value",props.value);
+        // this.modelOrg.setState("text",props.text);
         _this.config = {
             modelconfig: {
                 afterValueChange: _this.afterValueChange
@@ -198,30 +208,23 @@ var ReferField = function (_Component) {
             //         vm.get('table').setState('rowKeyField', props.valueField);
             //     })
             // })
-        };_this.modelOrg.on('beforeBrowse', function () {
-            if (_this.props.value) {
-                _this.modelOrg.setValue(_this.props.value.id ? _this.props.value.id : _this.props.value);
-            } else {
-                _this.modelOrg.setValue('');
-            }
-            if (cb.custom) {
-                cb.custom.referFieldValueKeys = _this.props.value || [];
-            } else {
-                cb.custom = {
-                    referFieldValueKeys: _this.props.value || []
-                };
-            }
-        });
-        return _this;
+            // this.modelOrg.on('beforeBrowse',()=>{
+            //     if(this.props.value){
+            //         this.modelOrg.setValue(this.props.value.id?this.props.value.id:this.props.value);
+            //     }else{
+            //         this.modelOrg.setValue('')
+            //     }
+            //     if(cb.custom){
+            //         cb.custom.referFieldValueKeys = this.props.value||[];
+            //     }else{
+            //         cb.custom = {
+            //             referFieldValueKeys:this.props.value||[]
+            //         }
+            //     }
+            // })
+        };return _this;
     }
 
-    /**
-     *  参数发生变化回调
-     *
-     * @param {object} nextProps 即将更新Props
-     * @param {object} nextState 即将更新State
-     * @memberof NumberField
-     */
     ReferField.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
         var _this2 = this;
 
@@ -233,11 +236,7 @@ var ReferField = function (_Component) {
             this.setState({
                 value: value
             }, function () {
-                if (Array.isArray(value)) {
-                    _this2.modelOrg.setValue(value);
-                } else {
-                    _this2.setValue(value);
-                }
+                value && _this2.modelOrg.setValue(Array.isArray(value) ? value : [value]);
             });
         }
     };
@@ -245,7 +244,6 @@ var ReferField = function (_Component) {
     ReferField.prototype.componentDidMount = function componentDidMount() {
         this.changeed = false;
         this.setValue(this.props.value, true);
-        this.modelOrg.setValue(this.props.text);
     };
 
     ReferField.prototype.componentDidUpdate = function componentDidUpdate() {

@@ -60,6 +60,8 @@ class ReferField extends Component {
             displayname: props.displayname,
             ...props
         });
+        // this.modelOrg.setState("value",props.value);
+        // this.modelOrg.setState("text",props.text);
         this.config = {
             modelconfig: {
                 afterValueChange: this.afterValueChange
@@ -73,26 +75,26 @@ class ReferField extends Component {
         //         vm.get('table').setState('rowKeyField', props.valueField);
         //     })
         // })
-        this.modelOrg.on('beforeBrowse',()=>{
-            if(this.props.value){
-                this.modelOrg.setValue(this.props.value.id?this.props.value.id:this.props.value);
-            }else{
-                this.modelOrg.setValue('')
-            }
-            if(cb.custom){
-                cb.custom.referFieldValueKeys = this.props.value||[];
-            }else{
-                cb.custom = {
-                    referFieldValueKeys:this.props.value||[]
-                }
-            }
-        })
+        // this.modelOrg.on('beforeBrowse',()=>{
+        //     if(this.props.value){
+        //         this.modelOrg.setValue(this.props.value.id?this.props.value.id:this.props.value);
+        //     }else{
+        //         this.modelOrg.setValue('')
+        //     }
+        //     if(cb.custom){
+        //         cb.custom.referFieldValueKeys = this.props.value||[];
+        //     }else{
+        //         cb.custom = {
+        //             referFieldValueKeys:this.props.value||[]
+        //         }
+        //     }
+        // })
     }
     
     onCancel=()=>{
-        if(!this.valueChanged){
-            this.modelOrg.setValue(this.props.text);
-        }
+        // if(!this.valueChanged){
+        //     this.modelOrg.setValue(this.props.text);
+        // }
     }
     /**
      *  参数发生变化回调
@@ -110,11 +112,7 @@ class ReferField extends Component {
             this.setState({
                 value
             },()=>{
-                if(Array.isArray(value)){
-                    this.modelOrg.setValue(value)
-                }else{
-                    this.setValue(value)
-                }
+                value && this.modelOrg.setValue(Array.isArray(value)?value:[value]);
             })
         }
     }
@@ -135,8 +133,7 @@ class ReferField extends Component {
 
     componentDidMount(){
         this.changeed = false;
-        this.setValue(this.props.value,true)
-        this.modelOrg.setValue(this.props.text);
+        this.setValue(this.props.value,true) 
     }
     componentDidUpdate(){
         this.changeed = true;
